@@ -1,0 +1,7 @@
+Displacement: 40253
+AwL: 4000
+AwT: 320
+zL: 8
+zT: 9
+N: 6
+DwT: 15375
