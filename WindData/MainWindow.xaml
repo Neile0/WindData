@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblFileLocation" Content="File Location:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" Height="26" Width="79"/>
+        <TextBox x:Name="txtFileLocation" IsReadOnly="True" HorizontalAlignment="Left" Margin="100,0,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="355" Height="18"/>
+        <Button x:Name="btnFileOpen" Content="Open" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Center" Click="btnFileOpen_Click" Height="26" Width="50"/>
+        <TextBox x:Name="txtDisplay" HorizontalAlignment="Left" Margin="560,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229" Height="392" Grid.RowSpan="2"/>
     </Grid>
 </Window>
