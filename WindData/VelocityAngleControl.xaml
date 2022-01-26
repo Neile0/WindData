@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="WindData.VelocityAngleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WindData"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="460">
+    <Grid Background="White">
+        <Label x:Name="lblVelocity" Content="Wind Velocity" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtVelocity" HorizontalAlignment="Left" Margin="87,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120" TextChanged="txtVelocity_TextChanged"/>
+        <Label x:Name="lblKnots" Content="(knots)" HorizontalAlignment="Left" Margin="212,0,0,0" VerticalAlignment="Center" Foreground="#FF909090"/>
+        <Label x:Name="lblAngle" Content="against" HorizontalAlignment="Left" Margin="263,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="dropdownAngle" HorizontalAlignment="Left" Margin="311,0,0,0" VerticalAlignment="Center" Width="120" SelectionChanged="dropdownAngle_SelectionChanged"/>
+    </Grid>
+</UserControl>
