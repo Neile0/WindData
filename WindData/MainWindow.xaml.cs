@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WindData
 {
@@ -13,12 +14,13 @@ namespace WindData
     {
         private string ImportedFileName;
         private Dictionary<string, string> ImportedData = new Dictionary<string, string>();
-        private float Displacement;
-        private float AwL; // Longitudinal Windage Area
-        private float AwT; // Transverse Windage Area
-        private float zL; // 
-        private float zT;
+        private double Displacement;
+        private double AwL; // Longitudinal Windage Area
+        private double AwT; // Transverse Windage Area
+        private double zL; // Centre of Longitudinal Windage Area
+        private double zT; // Centre of Transverse Windage Area
         private int N;
+        private List<VelocityAngleControl> velocityAngleControls = new List<VelocityAngleControl>();
 
         public MainWindow()
         {
@@ -38,11 +40,11 @@ namespace WindData
                 ImportedData.Add(keyValue[0], keyValue[1].Trim());
             }
 
-            Displacement = float.Parse(ImportedData["Displacement"]);
-            AwL = float.Parse(ImportedData["AwL"]);
-            AwT = float.Parse(ImportedData["AwT"]);
-            zL = float.Parse(ImportedData["zL"]);
-            zT = float.Parse(ImportedData["zT"]);
+            Displacement = double.Parse(ImportedData["Displacement"]);
+            AwL = double.Parse(ImportedData["AwL"]);
+            AwT = double.Parse(ImportedData["AwT"]);
+            zL = double.Parse(ImportedData["zL"]);
+            zT = double.Parse(ImportedData["zT"]);
             N = int.Parse(ImportedData["N"]);
         }
 
@@ -56,6 +58,31 @@ namespace WindData
             ParseResultsFile(ImportedFileName);
             txtFileLocation.Text = ImportedFileName;
             Print();
+            GenerateUserInputControls();
+        }
+
+        private void GenerateUserInputControls()
+        {
+            // Create N rows for user input
+
+            int rows = N;
+            for (int i = 0; i < rows; i++)
+            {
+                InputGrid.RowDefinitions.Add(new RowDefinition());
+                var velocityAngleControl = new VelocityAngleControl();
+                velocityAngleControls.Add(velocityAngleControl);
+                Grid.SetRow(velocityAngleControl, i);
+                InputGrid.Children.Add(velocityAngleControl);
+            }
+        }
+
+        private void btnCalculate_Click(object sender, RoutedEventArgs e)
+        {
+            txtDisplay.Text += '\n';
+            foreach (VelocityAngleControl velocityAngleControl in velocityAngleControls)
+            {
+                txtDisplay.Text += String.Format("\nVw: {0}, Angle: {1}", velocityAngleControl.WindVelocity, velocityAngleControl.WindAngle);
+            }
         }
     }
 }
