@@ -33,5 +33,6 @@
         </StackPanel>
         <!--Row 3-->
         <Button x:Name="btnCalculate" Content="Calculate" HorizontalAlignment="Left" Margin="20,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="99" Height="43" Click="btnCalculate_Click"></Button>
+        <Button x:Name="btnExport" Content="Export" HorizontalAlignment="Left" Margin="893,14,0,0" Grid.Row="2" VerticalAlignment="Top" Width="99" Height="43" Click="btnExport_Click"/>
     </Grid>
 </Window>

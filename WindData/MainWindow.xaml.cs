@@ -115,5 +115,52 @@ namespace WindData
                 gridDisplay.Items.Add(result);
             }
         }
+
+        /*
+         * Writes resutls to a file with each line as
+         * Date & Time ddmmyyyy.hhmmss
+         * Number of inputs ‘N’
+         * --Repeat N times----
+         * Wind Speed
+         * Wind Direction
+         * VwL
+         * VwT
+         * MwL
+         * MwT 
+         */
+        private void WriteResults(string filepath) 
+        {
+            FileStream fileStream = File.Create(filepath);
+            StreamWriter writer = new StreamWriter(fileStream);
+
+            var datetime = DateTime.Now;
+            writer.WriteLine(String.Format("Date & Time: {0}", datetime));
+
+            writer.WriteLine(String.Format("Number of Inputs 'N': {0}", N));
+
+            for (int i = 0; i < N; i++)
+            {
+                writer.WriteLine(String.Format("N{0} Wind Speed: {1}", i+1, results[i].WindVelocity));
+                writer.WriteLine(String.Format("N{0} Wind Direction: {1}", i+1, results[i].WindAngle));
+                writer.WriteLine(String.Format("N{0} VwL: {1}", i+1, results[i].WindVelocityLongitudinal));
+                writer.WriteLine(String.Format("N{0} VwT: {1}", i+1, results[i].WindVelocityTransverse));
+                writer.WriteLine(String.Format("N{0} MwL: {1}", i+1, results[i].WindMomentLongitudinal));
+                writer.WriteLine(String.Format("N{0} MwT: {1}", i+1, results[i].WindMomentTransverse));
+            }
+            writer.Close();
+            fileStream.Close();
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files | *.txt";
+            saveFileDialog.DefaultExt = "txt";
+            if (saveFileDialog.ShowDialog() == true)
+            { 
+                WriteResults(saveFileDialog.FileName);
+                MessageBox.Show("Exported to " + saveFileDialog.FileName);
+            }
+        }
     }
 }
