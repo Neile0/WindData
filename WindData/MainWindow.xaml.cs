@@ -21,6 +21,8 @@ namespace WindData
         private double zT; // Centre of Transverse Windage Area
         private int N;
         private List<VelocityAngleControl> velocityAngleControls = new List<VelocityAngleControl>();
+        private List<ResultsRow> results = new List<ResultsRow>();
+
 
         public MainWindow()
         {
@@ -76,12 +78,41 @@ namespace WindData
             }
         }
 
+        private class ResultsRow
+        {
+            public double WindVelocity { get; set; }
+            public double WindAngle { get; set; }
+            public double WindVelocityLongitudinal { get; set; }
+            public double WindVelocityTransverse { get; set; }
+            public double WindMomentLongitudinal { get; set; }
+            public double WindMomentTransverse { get; set; }
+        }
+
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
-            txtDisplay.Text += '\n';
             foreach (VelocityAngleControl velocityAngleControl in velocityAngleControls)
             {
-                txtDisplay.Text += String.Format("\nVw: {0}, Angle: {1}", velocityAngleControl.getWindVelocity(), velocityAngleControl.getWindAngle());
+                double velocity = velocityAngleControl.getWindVelocity();
+                double angle = velocityAngleControl.getWindAngle();
+
+                double windVelocityLongitudinal = Calculate.LongitudinalWindVelocity(Vw: velocity, wind_angle: angle);
+                double windVelocityTransverse = Calculate.TransverseWindVelocity(Vw: velocity, wind_angle: angle);
+
+                double windMomentLongitudinal = Calculate.LongitudinalWindMoment(AwL: this.AwL, VwL: windVelocityLongitudinal, zL: this.zL);
+                double windMomentTransverse = Calculate.TransverseWindMoment(AwT: this.AwT, VwT: windVelocityTransverse, zT: this.zT);
+
+                ResultsRow result = new ResultsRow
+                {
+                    WindVelocity = velocity,
+                    WindAngle = angle,
+                    WindVelocityLongitudinal = windVelocityLongitudinal,
+                    WindVelocityTransverse = windVelocityTransverse,
+                    WindMomentLongitudinal = windMomentLongitudinal,
+                    WindMomentTransverse = windMomentTransverse
+                };
+                results.Add(result);
+
+                gridDisplay.Items.Add(result);
             }
         }
     }

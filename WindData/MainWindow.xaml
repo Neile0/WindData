@@ -20,14 +20,14 @@
         <Grid x:Name="InputGrid" Grid.Row="1" Margin="20,0,545,0"/>
         <StackPanel Grid.Row="1"  Margin="550,0,80,0">
             <TextBox x:Name="txtDisplay" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="" Width="440" Height="215" Grid.Row="2"/>
-            <DataGrid HorizontalAlignment="Left" Height="215" Width="440">
+            <DataGrid x:Name="gridDisplay" HorizontalAlignment="Left" Height="215" Width="440">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Wind Velocity"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Wind Angle"></DataGridTextColumn>
-                    <DataGridTextColumn Header="VwL"></DataGridTextColumn>
-                    <DataGridTextColumn Header="VwT"></DataGridTextColumn>
-                    <DataGridTextColumn Header="MwL"></DataGridTextColumn>
-                    <DataGridTextColumn Header="MwT"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Wind Velocity" Binding="{Binding Path=WindVelocity}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Wind Angle" Binding="{Binding Path=WindAngle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="VwL" Binding="{Binding Path=WindVelocityLongitudinal}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="VwT" Binding="{Binding Path=WindVelocityTransverse}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="MwL" Binding="{Binding Path=WindMomentLongitudinal}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="MwT" Binding="{Binding Path=WindMomentTransverse}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
