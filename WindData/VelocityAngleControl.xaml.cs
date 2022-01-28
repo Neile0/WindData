@@ -1,17 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WindData
 {
@@ -22,7 +11,7 @@ namespace WindData
      * 
      */
     public partial class VelocityAngleControl : UserControl
-    { 
+    {
         public double WindAngle;
         public double WindVelocity;
 
@@ -51,22 +40,21 @@ namespace WindData
             WindVelocity = 0;
         }
 
-        private void dropdownAngle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public double getWindAngle()
         {
+            // Get degree value
+            double value = Double.Parse(txtAngle.Text);
+
+            // Get offset (wind measured against) from dropdown
             var selected = (string)dropdownAngle.SelectedItem;
-            WindAngle = angles[selected];
+            double offset = angles[selected];
+
+            return (value + offset) % 360; // Mod 360 
         }
 
-        private void txtVelocity_TextChanged(object sender, TextChangedEventArgs e)
+        public double getWindVelocity()
         {
-            try
-            {
-                WindVelocity = double.Parse(txtVelocity.Text);
-            }
-            catch (Exception)
-            {
-                txtVelocity.Text = "";
-            }
+            return Double.Parse(txtVelocity.Text);
         }
     }
 }

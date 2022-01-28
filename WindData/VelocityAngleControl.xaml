@@ -8,9 +8,11 @@
              d:DesignHeight="30" d:DesignWidth="460">
     <Grid Background="White">
         <Label x:Name="lblVelocity" Content="Wind Velocity" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtVelocity" HorizontalAlignment="Left" Margin="87,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120" TextChanged="txtVelocity_TextChanged"/>
-        <Label x:Name="lblKnots" Content="(knots)" HorizontalAlignment="Left" Margin="212,0,0,0" VerticalAlignment="Center" Foreground="#FF909090"/>
-        <Label x:Name="lblAngle" Content="against" HorizontalAlignment="Left" Margin="263,0,0,0" VerticalAlignment="Center"/>
-        <ComboBox x:Name="dropdownAngle" HorizontalAlignment="Left" Margin="311,0,0,0" VerticalAlignment="Center" Width="120" SelectionChanged="dropdownAngle_SelectionChanged"/>
+        <TextBox x:Name="txtVelocity" HorizontalAlignment="Left" Margin="87,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="60"/>
+        <Label x:Name="lblKnots" Content="(knots)" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Center" Foreground="#FF909090"/>
+        <Label x:Name="lblAngleAt" Content="at" HorizontalAlignment="Left" Margin="186,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtAngle" HorizontalAlignment="Left" Margin="208,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="60" />
+        <Label x:Name="lblAngle" Content="°    against" HorizontalAlignment="Left" Margin="264,0,0,0" VerticalAlignment="Center"/>
+        <ComboBox x:Name="dropdownAngle" HorizontalAlignment="Left" Margin="330,0,0,0" VerticalAlignment="Center" Width="120"/>
     </Grid>
 </UserControl>
