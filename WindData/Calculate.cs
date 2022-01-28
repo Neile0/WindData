@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindData
 {
     public class Calculate
     {
+        /* Helper function that converts degrees to radians to be used with Math.Cos and Math.Sin
+         * 
+         */
+        public static double ConvertDegreeToRadian(double degrees)
+        {
+            return (Math.PI / 180) * degrees;
+        }
 
         /* Calculates Longitudinal Wind Velocity Component
          * 
@@ -17,7 +20,8 @@ namespace WindData
          */
         public static double LongitudinalWindVelocity(double Vw, double wind_angle)
         {
-            return Vw * Math.Cos(wind_angle);
+            var radians = ConvertDegreeToRadian(wind_angle);
+            return Vw * Math.Cos(radians);
         }
 
         /* Calculates Transverse Wind Velocity Component
@@ -28,7 +32,8 @@ namespace WindData
          */
         public static double TransverseWindVelocity(double Vw, double wind_angle)
         {
-            return Vw * Math.Sin(wind_angle);
+            var radians = ConvertDegreeToRadian(wind_angle);
+            return Vw * Math.Sin(radians);
         }
 
         /* Calculates Longitudinal Wind Moment Component
