@@ -7,9 +7,9 @@ using System.Windows.Controls;
 
 namespace WindData
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /*
+     * A program that calculates Wind Moment and Wind Velocity Components, given a wind acting on a ship
+     */
     public partial class MainWindow : Window
     {
         private string ImportedFileName;
@@ -23,7 +23,6 @@ namespace WindData
         private List<VelocityAngleControl> velocityAngleControls = new List<VelocityAngleControl>();
         private List<ResultsRow> results = new List<ResultsRow>();
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +33,16 @@ namespace WindData
             txtDisplay.Text = String.Format("Filepath: {0}\n\nDisplacement: {1}\nAwL: {2}\nAwT:{3}\nzL: {4}\nzT: {5}\nN: {6}", ImportedFileName, Displacement, AwL, AwT, zL, zT, N);
         }
 
+        /*
+         * Parses a RESULTS.TXT file in the format "key: value"
+         * 
+         * Displacement:
+         * AwL:
+         * AwT:
+         * zL:
+         * zT:
+         * N:
+         */
         private void ParseResultsFile(String filePath)
         {
             foreach (string line in File.ReadAllLines(filePath))
@@ -50,6 +59,9 @@ namespace WindData
             N = int.Parse(ImportedData["N"]);
         }
 
+        /*
+         * Gets from the user the file path for the data to import.
+         */
         private void btnFileOpen_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -66,18 +78,21 @@ namespace WindData
         private void GenerateUserInputControls()
         {
             // Create N rows for user input
-
             int rows = N;
             for (int i = 0; i < rows; i++)
             {
                 InputGrid.RowDefinitions.Add(new RowDefinition());
-                var velocityAngleControl = new VelocityAngleControl();
+                var velocityAngleControl = new VelocityAngleControl(); // Custom control
                 velocityAngleControls.Add(velocityAngleControl);
                 Grid.SetRow(velocityAngleControl, i);
                 InputGrid.Children.Add(velocityAngleControl);
             }
         }
 
+        /*
+         * A class for storing resutls of each calculation
+         * Binds to DataGrid
+         */
         private class ResultsRow
         {
             public double WindVelocity { get; set; }
@@ -88,6 +103,11 @@ namespace WindData
             public double WindMomentTransverse { get; set; }
         }
 
+        /*
+         * Performs calculations on N user inputs and stores in results list.
+         * Displays results to a DataGrid
+         * 
+         */
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
             foreach (VelocityAngleControl velocityAngleControl in velocityAngleControls)
@@ -128,7 +148,7 @@ namespace WindData
          * MwL
          * MwT 
          */
-        private void WriteResults(string filepath) 
+        private void WriteResults(string filepath)
         {
             FileStream fileStream = File.Create(filepath);
             StreamWriter writer = new StreamWriter(fileStream);
@@ -140,24 +160,27 @@ namespace WindData
 
             for (int i = 0; i < N; i++)
             {
-                writer.WriteLine(String.Format("N{0} Wind Speed: {1}", i+1, results[i].WindVelocity));
-                writer.WriteLine(String.Format("N{0} Wind Direction: {1}", i+1, results[i].WindAngle));
-                writer.WriteLine(String.Format("N{0} VwL: {1}", i+1, results[i].WindVelocityLongitudinal));
-                writer.WriteLine(String.Format("N{0} VwT: {1}", i+1, results[i].WindVelocityTransverse));
-                writer.WriteLine(String.Format("N{0} MwL: {1}", i+1, results[i].WindMomentLongitudinal));
-                writer.WriteLine(String.Format("N{0} MwT: {1}", i+1, results[i].WindMomentTransverse));
+                writer.WriteLine(String.Format("N{0} Wind Speed: {1}", i + 1, results[i].WindVelocity));
+                writer.WriteLine(String.Format("N{0} Wind Direction: {1}", i + 1, results[i].WindAngle));
+                writer.WriteLine(String.Format("N{0} VwL: {1}", i + 1, results[i].WindVelocityLongitudinal));
+                writer.WriteLine(String.Format("N{0} VwT: {1}", i + 1, results[i].WindVelocityTransverse));
+                writer.WriteLine(String.Format("N{0} MwL: {1}", i + 1, results[i].WindMomentLongitudinal));
+                writer.WriteLine(String.Format("N{0} MwT: {1}", i + 1, results[i].WindMomentTransverse));
             }
             writer.Close();
             fileStream.Close();
         }
 
+        /*
+         * Gets file path from user to write results to
+         */
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text Files | *.txt";
             saveFileDialog.DefaultExt = "txt";
             if (saveFileDialog.ShowDialog() == true)
-            { 
+            {
                 WriteResults(saveFileDialog.FileName);
                 MessageBox.Show("Exported to " + saveFileDialog.FileName);
             }

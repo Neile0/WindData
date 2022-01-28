@@ -49,7 +49,7 @@ namespace WindData
             var selected = (string)dropdownAngle.SelectedItem;
             double offset = angles[selected];
 
-            return (value + offset) % 360; // Mod 360 
+            return (value + offset) % 360; // Mod 360 to restrict angle to [0, 360)
         }
 
         public double getWindVelocity()
