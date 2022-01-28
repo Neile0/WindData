@@ -81,7 +81,7 @@ namespace WindData
             txtDisplay.Text += '\n';
             foreach (VelocityAngleControl velocityAngleControl in velocityAngleControls)
             {
-                txtDisplay.Text += String.Format("\nVw: {0}, Angle: {1}", velocityAngleControl.WindVelocity, velocityAngleControl.WindAngle);
+                txtDisplay.Text += String.Format("\nVw: {0}, Angle: {1}", velocityAngleControl.getWindVelocity(), velocityAngleControl.getWindAngle());
             }
         }
     }
