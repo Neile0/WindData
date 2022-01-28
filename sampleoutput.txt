@@ -1,0 +1,38 @@
+Date & Time: 28/01/2022 13:50:38
+Number of Inputs 'N': 6
+N1 Wind Speed: 25
+N1 Wind Direction: 0
+N1 VwL: 25
+N1 VwT: 0
+N1 MwL: 800000
+N1 MwT: 0
+N2 Wind Speed: 25
+N2 Wind Direction: 180
+N2 VwL: -25
+N2 VwT: 3.06151588455594E-15
+N2 MwL: -800000
+N2 MwT: 8.81716574752112E-12
+N3 Wind Speed: 1
+N3 Wind Direction: 0
+N3 VwL: 1
+N3 VwT: 0
+N3 MwL: 32000
+N3 MwT: 0
+N4 Wind Speed: 1
+N4 Wind Direction: 90
+N4 VwL: 6.12303176911189E-17
+N4 VwT: 1
+N4 MwL: 1.9593701661158E-12
+N4 MwT: 2880
+N5 Wind Speed: 1
+N5 Wind Direction: 180
+N5 VwL: -1
+N5 VwT: 1.22460635382238E-16
+N5 MwL: -32000
+N5 MwT: 3.52686629900845E-13
+N6 Wind Speed: 1
+N6 Wind Direction: 270
+N6 VwL: -1.83690953073357E-16
+N6 VwT: -1
+N6 MwL: -5.87811049834741E-12
+N6 MwT: -2880
